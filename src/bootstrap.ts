@@ -6,6 +6,8 @@ import {
 import { AppModule } from './app.module';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { AllExceptionFilter } from './filters/all-exception.filter';
+import { LoggerService } from '@modules/logger/logger.service';
 
 export const bootstrap = async (): Promise<INestApplication> => {
   const app = await NestFactory.create(AppModule);
@@ -23,6 +25,8 @@ export const bootstrap = async (): Promise<INestApplication> => {
     type: VersioningType.URI,
     defaultVersion: '1',
   });
+
+  app.useGlobalFilters(new AllExceptionFilter(new LoggerService()));
 
   if (process.env.NODE_ENV !== 'production') {
     const config = new DocumentBuilder()

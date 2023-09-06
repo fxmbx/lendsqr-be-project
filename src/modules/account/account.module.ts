@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
+import { AccountController } from './controllers';
 import { AccountsService } from './services';
 import { KnexModule } from 'nest-knexjs';
 import { UserModule } from '../../modules/users/users.module';
-import { AccountController } from './controllers';
 
 @Module({
   imports: [KnexModule, UserModule],

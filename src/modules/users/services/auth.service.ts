@@ -6,8 +6,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { JwtTokensResponse } from '../dtos/auth.dto';
 import bcrypt from 'bcrypt';
 import { IUser } from '../interfaces/user.interface';
+import { CustomHttpException } from '../../../common/custom-http.exception';
 import { CreateUserDto } from '../dtos';
-import { CustomHttpException } from '@common/custom-http.exception';
 
 @Injectable()
 export class AuthService {

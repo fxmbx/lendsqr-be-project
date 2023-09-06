@@ -1,7 +1,8 @@
-import { UserModule } from '@modules/users/users.module';
+import { UserModule } from './modules/users/users.module';
 import { Module } from '@nestjs/common';
+import { KnexModule } from 'nest-knexjs';
 import { ConfigModule } from '@nestjs/config';
-import { KnexModule } from 'nestjs-knex';
+import { AccountModule } from './modules/account/account.module';
 
 @Module({
   imports: [
@@ -23,9 +24,8 @@ import { KnexModule } from 'nestjs-knex';
         },
       },
     }),
+    AccountModule,
     UserModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}
