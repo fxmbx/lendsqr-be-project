@@ -18,6 +18,7 @@
   - [Withdrawing Funds](#withdrawing-funds)
 - [Testing](#testing)
 - [Docker](#docker)
+- [Recommendation](#recommendation)
 - [Contributing](#contributing)
 
 ## Getting Started
@@ -210,6 +211,12 @@ To run a docker image of Postgres and RabbitMQ
 ```bash
 docker-compose up
 ```
+
+## Recommendation
+
+- implements a more secure authentication service
+- integrate a payment gateway e.g stripe
+- write more tigorous test
 
 ## Contributing
 
