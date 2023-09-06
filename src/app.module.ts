@@ -1,3 +1,4 @@
+import { UserModule } from '@modules/users/users.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { KnexModule } from 'nestjs-knex';
@@ -22,6 +23,7 @@ import { KnexModule } from 'nestjs-knex';
         },
       },
     }),
+    UserModule,
   ],
   controllers: [],
   providers: [],
