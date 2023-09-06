@@ -108,4 +108,46 @@ describe('UsersController', () => {
       );
     });
   });
+
+  describe('login', () => {
+    it('should return access token', async () => {
+      const createUserDto: CreateUserDto = {
+        username: 'username',
+        password: 'password',
+      };
+
+      await expect(controller.login(createUserDto)).resolves.toEqual({
+        ...createUserDto,
+      });
+
+      const serviceResponse: IServiceResponse<JwtTokensResponse> = {
+        result: { accessToken: accessToken },
+      };
+
+      const spyOne = jest
+        .spyOn(authService, 'login')
+        .mockResolvedValue(serviceResponse);
+
+      expect(spyOne).toBeCalled();
+      await expect(controller.login(createUserDto)).resolves.toEqual(
+        serviceResponse,
+      );
+    });
+    it('should throw  error', async () => {
+      const createUserDto: CreateUserDto = {
+        username: 'username',
+        password: 'password',
+      };
+
+      await expect(controller.login(createUserDto)).resolves.toEqual({
+        ...createUserDto,
+      });
+
+      const spyOne = jest.spyOn(authService, 'login').mockImplementation(() => {
+        throw new CustomHttpException('Error');
+      });
+      await expect(controller.login(createUserDto)).rejects.toThrow('Error');
+      expect(spyOne).toBeCalledWith(createUserDto);
+    });
+  });
 });

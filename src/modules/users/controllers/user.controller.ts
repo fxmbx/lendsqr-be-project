@@ -17,4 +17,11 @@ export class UsersController {
   ): Promise<IServiceResponse<JwtTokensResponse>> {
     return this.authService.register(dto);
   }
+
+  @Post('login')
+  async login(
+    @Body() dto: CreateUserDto,
+  ): Promise<IServiceResponse<JwtTokensResponse>> {
+    return this.authService.login(dto);
+  }
 }

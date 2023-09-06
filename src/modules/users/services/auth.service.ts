@@ -7,6 +7,7 @@ import { JwtTokensResponse } from '../dtos/auth.dto';
 import bcrypt from 'bcrypt';
 import { IUser } from '../interfaces/user.interface';
 import { CreateUserDto } from '../dtos';
+import { CustomHttpException } from '@common/custom-http.exception';
 
 @Injectable()
 export class AuthService {
@@ -22,6 +23,32 @@ export class AuthService {
       username: dto.username,
       password: hashedPassword,
     });
+
+    const token = this.generateToken(user.id!);
+
+    return {
+      result: {
+        accessToken: token,
+      },
+    };
+  }
+
+  async login(
+    dto: CreateUserDto,
+  ): Promise<IServiceResponse<JwtTokensResponse>> {
+    const user: IUser = await this.knex('users')
+      .where({ username: dto.username })
+      .first();
+
+    if (!user?.password) {
+      throw new CustomHttpException('User not found', 404);
+    }
+
+    const passwordMatch = await bcrypt.compare(dto.password, user.password!);
+
+    if (!passwordMatch) {
+      throw new CustomHttpException('Invalid credentials', 404);
+    }
 
     const token = this.generateToken(user.id!);
 
