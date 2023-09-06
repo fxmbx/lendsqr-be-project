@@ -1,73 +1,217 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Demo Credit Wallet Service
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+**Demo Credit Wallet Service** is a simple Node.js API with TypeScript for managing user wallets. It allows users to create accounts, fund their wallets, transfer funds to other users, and withdraw funds.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Author 🚀
 
-## Description
+> OLAORE OLUWAFUNMIBI OLUMUYIWA
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Table of Contents
 
-## Installation
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+  - [Creating an Account](#creating-an-account)
+  - [Funding Your Wallet](#funding-your-wallet)
+  - [Transferring Funds](#transferring-funds)
+  - [Withdrawing Funds](#withdrawing-funds)
+- [Testing](#testing)
+- [Docker](#docker)
+- [Contributing](#contributing)
 
-```bash
-$ npm install
+## Getting Started
+
+### Prerequisites
+
+Before you start, ensure you have the following installed on your system:
+
+- Node.js
+- npm (Node Package Manager)
+- MySQL (Make sure you have a MySQL server running)
+
+### Installation
+
+## Install NodeJS
+
+To Install NodeJS, kindly go to [Nodejs](https://nodejs.com) and follow the necessary instructions required depending on
+your PC Operating System
+
+## MACOS
+
+using a [package](https://nodejs.org/en/#download) simply download the installer
+
+using [homebrew](https://github.com/Homebrew/legacy-homebrew)
+
+```markdown
+brew install node
 ```
 
-## Running the app
+---
 
-```bash
-# development
-$ npm run start
+## Windows
 
-# watch mode
-$ npm run start:dev
+using a [package](https://nodejs.org/en/#download) simply download the installer
 
-# production mode
-$ npm run start:prod
+using [chocolatey](http://chocolatey.org/) to install Node
+
+```markdown
+cinst nodejs
 ```
 
-## Test
+---
 
-```bash
-# unit tests
-$ npm run test
+## To install MySql
 
-# e2e tests
-$ npm run test:e2e
+For Windows users, you can kindly follow this
+tutorials [here](https://dev.mysql.com/doc/refman/8.0/en/windows-installation.html) to install MySql on
+your local PC which explains how to create a database
 
-# test coverage
-$ npm run test:cov
+For Mac users, you can kindly follow this tutorials [here](https://dev.mysql.com/doc/refman/8.0/en/macos-installation.html) to
+install MySql on your local PC which explains how to create a database
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/fxmbx/lendsql-be-project.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd lendsql-be-project
+   ```
+
+3. Install the project dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Configure the database connection by editing the `knexfile.ts` file and providing your MySQL database credentials:
+
+   ```typescript
+   connection: {
+    host: '127.0.0.1',
+    user: 'root',
+    password: 'root',
+    database: 'demo_credit',
+   },
+   ```
+
+   and that in the app module
+
+5. Create the necessary database tables by running migrations:
+
+   ```bash
+   npm run migrate
+   ```
+
+6. Start the server:
+
+   ```bash
+   npm run start
+   ```
+
+## Review
+
+![alt text](./erd.png)
+
+Your wallet service API should now be running at `http://localhost:8080/v1`.
+Swagger on `http://localhost:8080/api`.
+
+## Usage
+
+### Redister an User
+
+To create a user, send a POST request to `/users/register` with the following JSON body:
+
+```json
+{
+  "username": "string",
+  "password": "string"
+}
 ```
 
-## Support
+### Login an User
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+To login, send a POST request to `/users/login` with the following JSON body:
 
-## Stay in touch
+```json
+{
+  "username": "string",
+  "password": "string"
+}
+```
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Creating an Account
 
-## License
+To create an account, send a POST request to `/account/create` with the following a bearer token header
 
-Nest is [MIT licensed](LICENSE).
+### Get Account Detail
+
+To get a users account, send a GET request to `/account` with the following a bearer token header
+
+### Get Account Transactions
+
+To create an account, send a GET request to `/account/transactions` with the following a parama
+
+```bash
+accountId*: string
+userId*: string
+```
+
+### Funding Your Wallet
+
+You can fund your wallet by sending a POST request to `/api/wallets/fund` with the following JSON body:
+
+```json
+{
+  "accountId": "string",
+  "amount": 0
+}
+```
+
+### Transferring Funds
+
+To transfer funds to another user's account, send a POST request to `/account/transfer` with the following JSON body:
+
+```json
+{
+  "fromAccountId": "string",
+  "toAccountId": "string",
+  "amount": 0
+}
+```
+
+### Withdrawing Funds
+
+You can withdraw funds from your wallet by sending a POST request to `/account/withdraw` with the following JSON body:
+
+```json
+{
+  "fromAccountId": "string",
+  "amount": 0
+}
+```
+
+## Testing
+
+To run unit tests for the project, use the following command:
+
+```bash
+npm run test
+```
+
+## Docker
+
+To run a docker image of Postgres and RabbitMQ
+
+```bash
+docker-compose up
+```
+
+## Contributing
+
+Contributions to this project are welcome. If you find any issues or have suggestions for improvements, please open an
+issue or submit a pull request.
