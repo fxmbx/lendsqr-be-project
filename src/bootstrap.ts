@@ -28,21 +28,19 @@ export const bootstrap = async (): Promise<INestApplication> => {
 
   app.useGlobalFilters(new AllExceptionFilter(new LoggerService()));
 
-  if (process.env.NODE_ENV !== 'production') {
-    const config = new DocumentBuilder()
-      .addBearerAuth()
-      .setTitle('Backend sandbox')
-      .setDescription('The backend sandbox description')
-      .setVersion('1.0')
-      .build();
+  const config = new DocumentBuilder()
+    .addBearerAuth()
+    .setTitle('Backend sandbox')
+    .setDescription('The backend sandbox description')
+    .setVersion('1.0')
+    .build();
 
-    const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup('api', app, document, {
-      swaggerOptions: {
-        persistAuthorization: true,
-      },
-    });
-  }
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document, {
+    swaggerOptions: {
+      persistAuthorization: true,
+    },
+  });
 
   await app.listen(process.env.SERVER_PORT ?? 8080, async () => {
     console.log(`============

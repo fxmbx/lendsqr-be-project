@@ -119,7 +119,7 @@ install MySql on your local PC which explains how to create a database
 ![alt text](./erd.png)
 
 Your wallet service API should now be running at `http://localhost:8080/v1`.
-Swagger on `http://localhost:8080/api`.
+Swagger on `http://localhost:8080/api` `https://oluwafunmibi-olaore-lendsqr-be-test.onrender.com/api/api`
 
 ## Usage
 
